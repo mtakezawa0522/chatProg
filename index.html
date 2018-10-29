@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Web App</title>
+    <link href="main.css" rel='stylesheet'>
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <h1>Chat</h1>
+        </header>
+        <ul>
+            <li v-for="item in items" :key="item.id">{{ item.val }}  ({{ item.date }})</li>
+        </ul>
+
+        <input v-model="message" @keydown.enter="doSend">
+        <button @click="doSend">press</button>
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+          apiKey: "AIzaSyDHRiOjp1Yj6uEtGz3KPNYElgF4bpFkakk",
+          authDomain: "chatprog-4756a.firebaseapp.com",
+          databaseURL: "https://chatprog-4756a.firebaseio.com",
+          projectId: "chatprog-4756a",
+          storageBucket: "chatprog-4756a.appspot.com",
+          messagingSenderId: "724332719936"
+        };
+    firebase.initializeApp(config);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

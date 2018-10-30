@@ -2,16 +2,33 @@ var app = new Vue({
     el: '#app',
     data: {
         message: '',
-        items: []
+        items: [],
+        user: {}
     },
     computed: {
 
     },
     created: function() {
-        ref_message = firebase.database().ref('message')
-        ref_message.limitToLast(10).on('child_added', this.childAdded)
+        firebase.auth().onAuthStateChanged(user => {
+            this.user = user ? user : {}
+            ref_message = firebase.database().ref('message')
+            if(user) {
+                this.items = []
+                ref_message.limitToLast(10).on('child_added', this.childAdded)
+            } else {
+                ref_message.limitToLast(10).off('child_added', this.childAdded)
+            }
+        })
     },
     methods: {
+        // Login処理
+        doLogin() {
+            var PROVIDER = new firebase.auth.GoogleAuthProvider()
+            firebase.auth().signInWithPopup(PROVIDER)
+        },
+        doLogout() {
+            firebase.auth().signOut()
+        },
         childAdded(snap) {
             const message = snap.val()
             this.items.push({
@@ -20,7 +37,8 @@ var app = new Vue({
             })
         },
         doSend: function() {
-            if(this.message.length) {
+            // ログインしていてメッセージが入っていること
+            if(this.user.uid && this.message.length) {
                 var now = new Date()
                 var tmpYear = now.getFullYear().toString()
                 var tmpMonth = now.getMonth().toString()

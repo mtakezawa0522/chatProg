@@ -1,3 +1,11 @@
+Vue.component('chat-cell', {
+    props: {
+        date: String,
+        message: String
+    },
+    template: '<li>{{ message }} <span class="cell">({{ date }})</span></li>'
+
+})
 var app = new Vue({
     el: '#app',
     data: {

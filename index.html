@@ -19,7 +19,7 @@
             </div>
         </header>
         <ul>
-            <li v-for="item in items" :key="item.id">{{ item.val }}  ({{ item.date }})</li>
+            <li is="chat-cell" v-for="item in items" :key="item.id" :message="item.val" :date="item.date"></li>
         </ul>
 
         <input v-model="message" :disable="!user.uid" @keydown.enter="doSend">

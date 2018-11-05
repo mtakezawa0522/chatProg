@@ -3,7 +3,7 @@ Vue.component('chat-cell', {
         date: String,
         message: String
     },
-    template: '<li>{{ message }} <span class="cell">({{ date }})</span></li>'
+    template: '<li>{{ message }} <br><span class="cell">({{ date }})</span></li>'
 
 })
 var app = new Vue({

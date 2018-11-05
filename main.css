@@ -12,7 +12,10 @@ li {
     border: solid 1px gray;
     margin-bottom: 4px;
     border-radius: 8px;
+    width: 60%
 }
 li:hover {
-    opacity: 0.6;
+    /* opacity: 0.6; */
+    box-shadow: 0 0 3px;
+
 }
